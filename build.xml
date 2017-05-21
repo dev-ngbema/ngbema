@@ -1,0 +1,27 @@
+
+<project default="firefox">
+	<property name="zipName" value="./target/ngameba.zip"/>
+	<property name="xpiName" value="./target/ngameba.xpi"/>
+
+	<target name="buildDir">
+		<mkdir dir="target"/>
+		<delete dir="build" />
+		<mkdir dir="build"/>
+	</target>
+	<target name="srcCopy">
+		<copy todir="build">
+			<fileset dir="." excludes="*.project,target,target/**,build,build/**,*.xml,*.xcf,*.json"/>
+		</copy>
+	</target>
+	
+	<target name="chrome" depends="buildDir">
+		<antcall target="srcCopy" />
+		<copy file="manifest.json" toDir="./build"/>
+		<zip destfile="${zipName}" basedir="./build" />
+	</target>
+	<target name="firefox" depends="buildDir">
+		<antcall target="srcCopy" />
+		<copy file="manifest-fx.json" tofile="./build/manifest.json"/>
+		<zip destfile="${xpiName}" basedir="./build" />
+	</target>
+</project>
