@@ -27,10 +27,17 @@
 	"permissions": [
 		"storage",
 		"tabs",
-		"webRequestBlocking",
 		"webRequest",
 		"https://api.abema.io/*",
 		"https://abema.tv/*"
 	],
-	"options_page": "opt.html"
+	"options_ui": {
+		"page": "opt.html"
+	},
+	"applications": {
+		"gecko": {
+			"id": "dev@hoge.moge",
+			"strict_min_version": "47.0"
+		}
+	}
 }
