@@ -12,9 +12,8 @@ var ngList = [];
 var maxCommentCount = 30;
 
 function optLoad() {
-	console.log("optLoad");
 	chrome.storage.local.get(function(items) {
-		if (items.ngWord != "") {
+		if (items.ngWord) {
 			var isHide = items.hideNg;
 			var lines = items.ngWord.split(/\n/);
 			for (var i = 0; i < lines.length; i++) {
@@ -43,13 +42,22 @@ function isNg(str, ng) {
  * div.styles__twitter-panel___2xfTL
  */
 function hideTwitterPanel() {
-	$("#div[class *='styles__twitter-panel']").css("display", "none");
+	$("div[class *='styles__twitter']").css("display", "none");
+}
+
+/**
+ * 
+ */
+function hideTablePopUp(){
+	$("div[class*='styles__popup___']").parent("div").css("display", "none");
+	$("div[class*='styles__tutorial-']").css("display", "none");
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	hideTablePopUp();
 	hideTwitterPanel();
 	if (request.type != "addComment") {
-		return true;
+		return;
 	}
 	var ng = optLoad();
 	console.log("recieve addComment");
@@ -67,8 +75,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		if (isNg(etxt,ng)) {
 			console.log("NG:"+etxt);
 			if (isHide) {
-				//$(e).css("display", "none");
-				//$(e).siblings("p").css("display", "none");
 				$(e).attr("hidden", "hidden");
 				$(e).siblings("p").attr("hidden", "hidden");
 				e.textContent = "NGワード";
@@ -78,6 +84,3 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		}
 	}
 });
-function d(s) {
-	console.log(s);
-}

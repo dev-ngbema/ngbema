@@ -37,17 +37,15 @@ function sendMessage(data) {
  * 
  */
 chrome.webRequest.onCompleted.addListener(function(details) {
-	if (details.url.indexOf(urlOnShow) != -1) {
-		sendMessage({
-			type : "pageShow"
-		});
-	}
 	if (details.url.indexOf(urlComment) != -1) {
 		console.log("load comment");
 		sendMessage({
 			type : "addComment"
 		});
+	} else {
+		sendMessage({ type : "Heartbeat"});
 	}
+	
 }, {
 	urls : [ "https://api.abema.io/*" ]
 }, [ "responseHeaders" ]);

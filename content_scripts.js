@@ -54,9 +54,9 @@ function hideTablePopUp(){
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	hideTablePopUp();
+	hideTwitterPanel();
 	if (request.type != "addComment") {
-		hideTablePopUp();
-		hideTwitterPanel();
 		return;
 	}
 	var ng = optLoad();
