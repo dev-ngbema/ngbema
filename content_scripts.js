@@ -43,6 +43,8 @@ function isNg(str, ng) {
  */
 function hideTwitterPanel() {
 	$("div[class *='styles__twitter']").css("display", "none");
+	$("div.v3_wH").css("display", "none");
+	$("div.v3_wA").css("display", "none");
 }
 
 /**
@@ -51,6 +53,7 @@ function hideTwitterPanel() {
 function hideTablePopUp(){
 	$("div[class*='styles__popup___']").parent("div").css("display", "none");
 	$("div[class*='styles__tutorial-']").css("display", "none");
+	$("div.fJ_fN").css("display", "none");
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {

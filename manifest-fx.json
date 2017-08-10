@@ -1,6 +1,6 @@
 {
 	"name": "ngbema",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"manifest_version": 2,
 	"description": "unofficial abema tv extension. Apply NGWord to comments",
 	"background": {
