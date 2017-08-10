@@ -37,34 +37,30 @@ function isNg(str, ng) {
 	return false;
 }
 
-/**
- * #main > div > main > div > div > div.style__scroller___1TkXI >
- * div.styles__twitter-panel___2xfTL
- */
-function hideTwitterPanel() {
-	$("div[class *='styles__twitter']").css("display", "none");
-}
 
 /**
  * 
  */
-function hideTablePopUp(){
-	$("div[class*='styles__popup___']").parent("div").css("display", "none");
-	$("div[class*='styles__tutorial-']").css("display", "none");
+function hidePopUp(isTimeTablePage){
+	if (isTimeTablePage) {
+		$("img[srcset*=tutorial]").parent().parent().parent().css("display", "none");
+	} else {
+		$("img[srcset*=tutorial]").parent().parent().css("display", "none");
+	}
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	hideTablePopUp();
-	hideTwitterPanel();
+	console.log(request.type);
+	hidePopUp(request.type == "timetable");
 	if (request.type != "addComment") {
 		return;
 	}
 	var ng = optLoad();
 	console.log("recieve addComment");
 	
-	var commentRoot = $("[class*='styles__comment-list-wrapper___']:first");
+	var commentRoot = $("form").next();
 
-	var el = commentRoot.find("p[class*='styles__message___']");
+	var el = commentRoot.find("p[class*='xH_fy']");
 	var l = el.length > maxCommentCount ? maxCommentCount : el.length;
 	for (var i = 0; i < el.length; i++) {
 		if (i > l) {

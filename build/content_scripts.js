@@ -43,6 +43,8 @@ function isNg(str, ng) {
  */
 function hideTwitterPanel() {
 	$("div[class *='styles__twitter']").css("display", "none");
+	$("div.v3_wH").css("display", "none");
+	$("div.v3_wA").css("display", "none");
 }
 
 /**
@@ -51,6 +53,8 @@ function hideTwitterPanel() {
 function hideTablePopUp(){
 	$("div[class*='styles__popup___']").parent("div").css("display", "none");
 	$("div[class*='styles__tutorial-']").css("display", "none");
+	$("div.fJ_fL").css("display", "none");
+	$("div.fJ_fN").css("display", "none");
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
@@ -62,9 +66,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	var ng = optLoad();
 	console.log("recieve addComment");
 	
-	var commentRoot = $("[class*='styles__comment-list-wrapper___']:first");
+	var commentRoot = $("[class*='Ai_Am t7_e t7_t9']:first");
 
-	var el = commentRoot.find("p[class*='styles__message___']");
+	var el = commentRoot.find("p[class*='xH_fy']");
 	var l = el.length > maxCommentCount ? maxCommentCount : el.length;
 	for (var i = 0; i < el.length; i++) {
 		if (i > l) {

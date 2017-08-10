@@ -6,7 +6,7 @@ if (!isdebug) {
 	};
 }
 // 番組表ポップアップURL
-var urlDailyHighlightPopups = "https://api.abema.io/v1/dailyHighlightPopups";
+var urlDailyHighlightPopups = "dailyHighlightPopups";
 // 各Pageで表示時に呼ばれるUrl
 var urlOnShow = "https://api.abema.io/v1/tracks/mine";
 // コメントURL(中にキーが入っているので切り出し)
