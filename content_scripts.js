@@ -52,15 +52,15 @@ function hidePopUp(isTimeTablePage){
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	console.log(request.type);
 	hidePopUp(request.type == "timetable");
-	if (request.type != "addComment") {
+	if (request.type != "comment") {
 		return;
 	}
 	var ng = optLoad();
-	console.log("recieve addComment");
+	console.log("recieve comment");
 	
 	var commentRoot = $("form").next();
 
-	var el = commentRoot.find("p[class*='xH_fy']");
+	var el = commentRoot.find("p");
 	var l = el.length > maxCommentCount ? maxCommentCount : el.length;
 	for (var i = 0; i < el.length; i++) {
 		if (i > l) {
@@ -68,6 +68,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		}
 		var e = el.get(i);
 		var etxt = e.textContent.toLowerCase();
+		console.log("CHK:"+etxt);
 		if (isNg(etxt,ng)) {
 			console.log("NG:"+etxt);
 			if (isHide) {
