@@ -24,6 +24,10 @@ function sendMessage(data) {
 		currentWindow : true
 	}, function(tabs) {
 		if (tabs.length > 0) {
+			// 番組表表示の場合、Type差し替え
+			if (tabs[0].url.indexOf("/timetable") != -1) {
+				data.type="timetable";
+			}
 			chrome.tabs.sendMessage(tabs[0].id, data);
 		}
 	});
@@ -37,15 +41,11 @@ function sendMessage(data) {
  * 
  */
 chrome.webRequest.onCompleted.addListener(function(details) {
+	var type="Heartbeat";
 	if (details.url.indexOf(urlComment) != -1) {
-		console.log("load comment");
-		sendMessage({
-			type : "addComment"
-		});
-	} else {
-		sendMessage({ type : "Heartbeat"});
+		type="comment";
 	}
-	
+	sendMessage({ type : type});
 }, {
 	urls : [ "https://api.abema.io/*" ]
 }, [ "responseHeaders" ]);
